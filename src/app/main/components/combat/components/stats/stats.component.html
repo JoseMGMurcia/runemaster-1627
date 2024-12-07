@@ -1,0 +1,77 @@
+@if(pj){
+  <div class="stats-wrapper u-flex u-flex-wrap margin-top"  >
+    @for (stat of stats; track stat.value) {
+      <div class="u-flex u-flex-column margin-left u-border-all stat">
+        <div class="u-width-100 u-flex u-flex-center group-header" (click)="detail(stat)">
+          <div-tooltip
+              class="u-width-100"
+              tooltipText="{{ (!stat.swShowDetail ? 'COMMON.SEE_DETAIL' : 'COMMON.HIDE_DETAIL') | translate }}"
+              [tooltipPosition]="RQGTooltipPositionEnum.RIGHT">
+            <p class="u-text-center strong group-header u-width-100">{{ "PJ.STATS."+[stat.statType] | translate }}</p>
+          </div-tooltip>
+        </div>
+        @if(!stat?.swShowDetail) {
+        <div class="u-flex u-flex-center">
+           <button (click)="setTempStat(stat, -1)" class="card-icon-button u-flex u-flex-center">
+            <img src="assets/icons/nav/remove_solid.svg" alt="">
+          </button>
+          <p class="u-text-center margin-left-sm">{{ stat.value + stat.permBonus + stat.tempBonus }}</p>
+          <button (click)="setTempStat(stat, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-center">
+            <img src="assets/icons/nav/add_solid.svg" alt="">
+          </button>
+        </div>
+        }
+        @else{
+          <p class="center u-width-100">{{ stat.value + stat.permBonus + stat.tempBonus }}</p>
+          <div class="u-flex argin-left maximum-width u-flex-space-between">
+            <p class="strong margin-left">{{ "PJ.STAT_TEXT.VALUE" | translate }}</p>
+            <div class="u-flex u-flex-center">
+              <button (click)="setStat(stat, -5)" class="card-icon-button u-flex u-flex-center">
+                <img src="assets/icons/nav/minus_5.png" alt="" class="wide">
+              </button>
+              <button (click)="setStat(stat, -1)" class="card-icon-button u-flex u-flex-center">
+                <img src="assets/icons/nav/remove_solid.svg" alt="">
+              </button>
+              <p>{{ stat.value }}</p>
+              <button (click)="setStat(stat, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-center">
+                <img src="assets/icons/nav/add_solid.svg" alt="">
+              </button>
+              <button (click)="setStat(stat, 5)" class="card-icon-button shadow u-flex u-flex-center">
+                <img src="assets/icons/nav/plus_5.png" alt="" class="wide">
+              </button>
+            </div>
+
+          </div>
+
+          <div class="u-flex argin-left maximum-width u-flex-space-between">
+            <p class="strong margin-left">{{ "PJ.STAT_TEXT.TEMPORAL_BONUS" | translate }}</p>
+            <div class="u-flex u-flex-center">
+              <button (click)="setTempStat(stat, -1)" class="card-icon-button u-flex u-flex-center">
+                <img src="assets/icons/nav/remove_solid.svg" alt="">
+              </button>
+              <p>{{ stat.tempBonus }}</p>
+              <button (click)="setTempStat(stat, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-center">
+                <img src="assets/icons/nav/add_solid.svg" alt="">
+              </button>
+            </div>
+          </div>
+
+          <div class="u-flex argin-left maximum-width u-flex-space-between">
+            <p class="strong margin-left">{{ "PJ.STAT_TEXT.PERMANENT_BONUS" | translate }}</p>
+            <div class="u-flex u-flex-center">
+              <button (click)="setPermStat(stat, -1)" class="card-icon-button u-flex u-flex-center">
+                <img src="assets/icons/nav/remove_solid.svg" alt="">
+              </button>
+              <p>{{ stat.permBonus }}</p>
+              <button (click)="setPermStat(stat, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-center">
+                <img src="assets/icons/nav/add_solid.svg" alt="">
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+    <app-runes class="margin-left"/>
+    <app-pasions class="margin-right"/>
+  </div>
+}

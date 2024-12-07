@@ -1,0 +1,118 @@
+@use 'assets/scss/custom-colors.scss' as colors;
+
+.tooltip {
+  position:relative;
+
+  p {
+    padding: 4px 8px;
+    color: colors.$white-50;
+    background-color: colors.$indigo-a400;
+    font-weight:normal;
+    font-size: 14px;
+    border-radius:8px;
+    position:absolute;
+    z-index:99999999;
+    box-sizing:border-box;
+    box-shadow:0 1px 8px colors.$blue-gray-900;
+    display:none;
+    width: max-content;
+    max-width: 200px;
+
+    i {
+      position:absolute;
+      width:24px;
+      height:12px;
+      overflow:hidden;
+
+      &::after {
+        content:'';
+        position:absolute;
+        width:12px;
+        height:12px;
+        background-color: colors.$indigo-a400;
+        box-shadow:0 1px 8px colors.$blue-gray-900;
+        left:50%;
+        transform:translate(-50%,-50%) rotate(45deg);
+      }
+    }
+  }
+
+  &.top {
+    p {
+      top:-20px;
+      left:50%;
+      transform:translate(-50%, -75%);
+
+      i {
+        top:100%;
+        left:50%;
+        margin-left:-12px;
+
+        &::after {
+          left:50%;
+          transform:translate(-50%,-50%) rotate(45deg);
+        }
+      }
+    }
+  }
+
+  &.bottom {
+    p {
+      bottom:-20px;
+      left:50%;
+      transform:translate(-50%, 25%);
+
+      i {
+        bottom:100%;
+        left:50%;
+        margin-left:-12px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &.left {
+    p {
+      top:50%;
+      left:-20px;
+      transform:translate(-85%, -50%);
+
+      i {
+        top:50%;
+        left:100%;
+        margin-top:-6px;
+        transform: rotate(-90deg) translate(0, -50%);
+
+        &::after {
+          left:50%;
+          transform:translate(-50%,-50%) rotate(45deg);
+        }
+      }
+    }
+  }
+
+  &.right {
+    p {
+      top:50%;
+      right:-20px;
+      transform:translate(85%, -50%);
+
+      i {
+        top:50%;
+        right:100%;
+        margin-top:-6px;
+        transform: rotate(90deg) translate(0, -50%);
+
+        &::after {
+          left:50%;
+          transform:translate(-50%,-50%) rotate(45deg);
+        }
+      }
+    }
+  }
+
+
+  &:hover p {
+    display:block;
+  }
+}

@@ -1,0 +1,25 @@
+@use 'assets/scss/custom-colors.scss' as colors;
+
+.utility-wrap {
+  background: colors.$card-background;
+  border-radius: 16px;
+  margin: 4px 4px 0 4px;
+  min-width: min-content;
+  padding: 8px;
+}
+
+form {
+  width: 100%;
+  min-width: min-content;
+}
+
+.result {
+  min-width: 250px;
+  min-height: 50px;
+  flex: 1;
+  background: colors.$blue-gray-50;
+}
+
+.last-result {
+  font-weight: 600;
+}

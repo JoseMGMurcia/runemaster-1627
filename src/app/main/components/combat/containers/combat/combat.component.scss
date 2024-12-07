@@ -1,0 +1,8 @@
+@use 'assets/scss/custom-colors.scss' as colors;
+
+.combat-wrap {
+  background: colors.$card-background;
+  border-radius: 16px;
+  margin: 4px;
+  padding: 8px;
+}

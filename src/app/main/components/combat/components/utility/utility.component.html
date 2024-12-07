@@ -1,0 +1,52 @@
+@if(pj?.name){
+  <div class="weapon-wrapper u-flex u-flex-wrap margin-top u-width-100">
+    <div-tooltip
+      tooltipText='{{ "UTILITY.ACTIONS.ADD_MELEE_WEAPON" | translate }}'>
+      <button (click)="addWeapon(WeaponGroupEnum.MELEE)" class="icon-button tooltip">
+        <img src="assets/icons/pj/add_weapon.svg" alt="add weapon">
+      </button>
+    </div-tooltip>
+
+    <div-tooltip
+      tooltipText='{{ "UTILITY.ACTIONS.ADD_SHIELD" | translate }}'>
+      <button (click)="addWeapon(WeaponGroupEnum.SHIELDS)" class="icon-button tooltip">
+        <img src="assets/icons/pj/add_shield.png" alt="add shield">
+      </button>
+    </div-tooltip>
+
+    <div-tooltip
+      tooltipText='{{ "UTILITY.ACTIONS.ADD_RANGED_WEAPON" | translate }}'>
+      <button (click)="addWeapon(WeaponGroupEnum.RANGED)" class="icon-button tooltip">
+        <img src="assets/icons/pj/add_bow.png" alt="add rangued weapon">
+      </button>
+    </div-tooltip>
+
+    <div-tooltip
+      tooltipText='{{ "UTILITY.ACTIONS.ADD_ARMOR" | translate }}'>
+      <button (click)="addArmor()" class="icon-button tooltip">
+        <img src="assets/icons/pj/add_armor.png" alt="add armor">
+      </button>
+    </div-tooltip>
+
+    <div-tooltip
+      tooltipText='{{ "UTILITY.ACTIONS.RESET_TEMPORAL_BONUS" | translate }}'>
+      <button (click)="resetTemporals()" class="icon-button tooltip">
+        <img src="assets/icons/nav/reset.svg" alt="add armor">
+      </button>
+    </div-tooltip>
+
+    <div-tooltip
+      tooltipText='{{ "UTILITY.ACTIONS.DUPLICATE_CHARACTER" | translate }}'>
+      <button (click)="cloneCharacter()" class="icon-button tooltip">
+        <img src="assets/icons/nav/copy.svg" alt="add armor">
+      </button>
+    </div-tooltip>
+
+    <div-tooltip
+      tooltipText='{{ "UTILITY.ACTIONS.CHANGE_BODY" | translate }}'>
+      <button (click)="changeBody()" class="icon-button tooltip">
+        <img src="assets/icons/nav/exchange.png" alt="change body">
+      </button>
+    </div-tooltip>
+  </div>
+}

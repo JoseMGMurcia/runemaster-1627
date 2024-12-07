@@ -1,0 +1,21 @@
+export enum RunesEnum {
+  FIRE = 'FIRE',
+  WATER = 'WATER',
+  EARTH = 'EARTH',
+  AIR = 'AIR',
+  DARKNESS = 'DARKNESS',
+  MOON = 'MOON',
+
+  FERTILITY = 'FERTILITY',
+  DEATH = 'DEATH',
+  HARMONY = 'HARMONY',
+  DISORDER = 'DISORDER',
+  ILLUSION = 'ILLUSION',
+  TRUTH = 'TRUTH',
+  MAN = 'MAN',
+  BEAST = 'BEAST',
+  PLANT = 'PLANT',
+  SPIRIT = 'SPIRIT',
+  EXTAXIS = 'EXTAXIS',
+  MOVEMENT = 'MOVEMENT',
+}

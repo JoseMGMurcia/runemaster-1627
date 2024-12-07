@@ -1,0 +1,40 @@
+<div class="combat-wrap">
+  @if(pnj){
+    <div class="u-flex u-flex-space-between u-flex-center">
+      <button (click)="swichCharacterIndex(-1)" class="icon-button xs">
+        <img src="assets/icons/nav/minor.svg" alt="Icono previo">
+      </button>
+
+      <p class="strong italic">{{ pnj.name }}</p>
+      <div class="u-flex">
+        <button (click)="close()" class="icon-button xxs" [disabled]="!pnj || pnj.name === ''">
+          <img src="assets/icons/nav/close.svg" alt="Icono cerrar">
+        </button>
+        <button (click)="save()" class="icon-button xs" [disabled]="!pnj || pnj.name === ''">
+          <img src="assets/icons/nav/scroll.svg" alt="Icono cerrar">
+        </button>
+        <button (click)="deleteCharacter()" class="icon-button xs margin-left">
+          <img src="assets/icons/nav/trash.svg" alt="delete char">
+        </button>
+        <button (click)="swichCharacterIndex(1)" class="icon-button xs margin-left">
+          <img src="assets/icons/nav/greater.svg" alt="Icono previo">
+        </button>
+
+      </div>
+    </div>
+    <div class="u-flex u-width-100">
+      <div class="u-width-75">
+        <pj-stats/>
+        <app-pj-locations/>
+      </div>
+      <div class="u-width-25">
+        <app-briefing/>
+      </div>
+    </div>
+    <div class="u-flex u-width-100">
+      <app-weapons class="u-width-100"/>
+    </div>
+    <app-notes/>
+    <app-pj-utility/>
+  }
+</div>

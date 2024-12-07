@@ -1,0 +1,16 @@
+@use 'assets/scss/custom-colors.scss' as colors;
+
+.weapon-wrapper {
+  border-radius: 8px;
+  border: 1px solid colors.$blue-gray-50;
+  overflow: hidden;
+}
+
+.even {
+  width: 100%;
+}
+
+.odd {
+  background-color: colors.$card-background-pair;
+  width: 100%;
+}

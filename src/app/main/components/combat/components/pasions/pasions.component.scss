@@ -1,0 +1,5 @@
+@use 'assets/scss/custom-colors.scss' as colors;
+
+.odd {
+  background-color: colors.$card-background-pair;
+}

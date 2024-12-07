@@ -1,0 +1,17 @@
+<form [formGroup]="form" class="sections-wrap u-width-100 u-flex u-flex-column u-flex-center">
+  <app-select
+    [control]="form.controls.section"
+    formControlName="section"
+    [options]="options"
+    (valueChanges)="sectionChange($event)"/>
+  <ng-container [ngSwitch]="section">
+    <app-locations class="u-width-100" *ngSwitchCase="SectionEnum.Locations"/>
+    <app-resistance class="u-width-100" *ngSwitchCase="SectionEnum.Resistances" (rolled)="addResults($event)"/>
+    <app-attack-defence class="u-width-100" *ngSwitchCase="SectionEnum.AtackDefence"/>
+    <app-fumbles class="u-width-100" *ngSwitchCase="SectionEnum.Fumbles"/>
+    <app-location-damages class="u-width-100" *ngSwitchCase="SectionEnum.LocationDamages"/>
+    <app-characters class="u-width-100" *ngSwitchCase="SectionEnum.Characters"/>
+    <app-sorcery-calendar class="u-width-100" *ngSwitchCase="SectionEnum.SorceryCalendar"/>
+    <app-spells class="u-width-100" *ngSwitchCase="SectionEnum.Spells"/>
+  </ng-container>
+</form>

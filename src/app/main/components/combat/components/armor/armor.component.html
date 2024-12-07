@@ -1,0 +1,94 @@
+<div class="armor-wrapper u-flex u-flex-column u-border-all">
+  <div class="u-width-100 u-flex u-flex-center">
+    <div-tooltip
+      tooltipText="{{ (!armor?.swDetail ? 'COMMON.SEE_DETAIL' : 'COMMON.HIDE_DETAIL') | translate }}">
+      <button (click)="detail()" class="icon-button xs">
+        <img src="assets/icons/nav/eye.svg" alt="Icono cerrar">
+      </button>
+    </div-tooltip>
+    <div class="u-width-100 u-flex u-flex-space-between">
+      <p>
+        {{  'ARMORS.TYPES.' + armor?.type  | translate }}
+        {{ ' - ' }}
+        {{  'ARMORS.MATERIALS.' + armor?.material  | translate }}
+      </p>
+      <p class="strong margin-right">
+        {{  'PJ.AP' | translate }}:  {{ armor?.armorPoints }}
+      </p>
+    </div>
+
+  </div>
+
+  @if(armor?.swDetail) {
+    <form [formGroup]="form" class="u-width-100 margin-bottom">
+      <div class="u-width-100 u-flex u-flex-space-between">
+        <div class="u-flex">
+          <p>{{  'ARMORS.EQUIPPED' | translate }}</p>
+          <input
+            formControlName="equipped"
+            type="checkbox"
+            (change)="handleEquippedChange()" />
+        </div>
+        <p>{{  'PJ.CRG' | translate }}: {{ getTotalArmorWeight() }}</p>
+        <div-tooltip
+          tooltipText="{{ 'UTILITY.ACTIONS.REMOVE_ARMOR' | translate }}"
+          [tooltipPosition]="RQGTooltipPositionEnum.LEFT"
+          >
+          <button (click)="removeArmor()" class="icon-button xs">
+            <img src="assets/icons/nav/trash.svg" alt="Eliminar">
+          </button>
+        </div-tooltip>
+      </div>
+      <div class="u-width-100 u-flex u-margin-top" >
+        <p class="strong margin-left u-width-20">{{ "PJ.BONUSES" | translate }}</p>
+        <p class="u-width-40 center strong">{{ "PJ.BONUS.TEMPORAL_VERY_SHORT" | translate }}</p>
+        <p class="u-width-40 center strong">{{ "PJ.BONUS.PERMANENT_VERY_SHORT" | translate }}</p>
+      </div>
+
+      <div class="u-width-100 u-flex" >
+        <p class="strong margin-left u-width-20">{{ "PJ.AP" | translate }}:</p>
+        <div class="u-width-40 u-flex u-flex-space-center">
+          <button (click)="setTempAPMod(-1)" class="card-icon-button u-flex u-flex-space-center">
+            <img src="assets/icons/nav/remove_solid.svg" alt="add temporal armor bonus">
+          </button>
+          <p>{{ armor?.temporalBonus?.AP }}</p>
+          <button (click)="setTempAPMod(1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+            <img src="assets/icons/nav/add_solid.svg" alt="remove temporal armor bonus">
+          </button>
+        </div>
+        <div class="u-width-40 u-flex u-flex-space-center">
+          <button (click)="setPermanentAPMod(-1)" class="card-icon-button u-flex u-flex-space-center">
+            <img src="assets/icons/nav/remove_solid.svg" alt="add permanent HP bonus">
+          </button>
+          <p>{{ armor?.permanentBonus?.AP }}</p>
+          <button (click)="setPermanentAPMod(1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+            <img src="assets/icons/nav/add_solid.svg" alt="remove permanent HP bonus">
+          </button>
+        </div>
+      </div>
+
+      <div class="u-width-100 u-flex" >
+        <p class="strong margin-left u-width-20">{{ "PJ.CRG" | translate }}:</p>
+        <div class="u-width-40 u-flex u-flex-space-center">
+          <button (click)="setTempCRGMod(-1)" class="card-icon-button u-flex u-flex-space-center">
+            <img src="assets/icons/nav/remove_solid.svg" alt="add temporal armor bonus">
+          </button>
+          <p>{{ armor?.temporalBonus?.weight }}</p>
+          <button (click)="setTempCRGMod(1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+            <img src="assets/icons/nav/add_solid.svg" alt="remove temporal armor bonus">
+          </button>
+        </div>
+        <div class="u-width-40 u-flex u-flex-space-center">
+          <button (click)="setPermanentCRGMod(-1)" class="card-icon-button u-flex u-flex-space-center">
+            <img src="assets/icons/nav/remove_solid.svg" alt="add permanent HP bonus">
+          </button>
+          <p>{{ armor?.permanentBonus?.weight }}</p>
+          <button (click)="setPermanentCRGMod(1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+            <img src="assets/icons/nav/add_solid.svg" alt="remove permanent HP bonus">
+          </button>
+        </div>
+      </div>
+
+    </form>
+  }
+</div>

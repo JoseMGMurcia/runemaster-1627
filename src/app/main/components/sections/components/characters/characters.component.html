@@ -1,0 +1,24 @@
+<div class="characters-wrap">
+  <form [formGroup]="form" class="u-flex u-flex-space-center u-flex-column">
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-input
+        label="{{ 'UTILITY.LABELS.NEW_CHARACTER' | translate }}"
+        formControlName="newCharacter"
+        [control]="form.controls.newCharacter"/>
+      <button (click)="newCharacter()" class="icon-button sm">
+        <img src="assets/icons/pj/add_pj.svg" alt="Icono de añadir pj">
+      </button>
+    </div>
+    <div class="u-width-100 u-flex u-flex-space-center" *ngIf="pjsOptions.length > 0">
+      <app-select
+        label="{{ 'UTILITY.LABELS.EXISTS_CHARACTER' | translate }}"
+        [control]="form.controls.existingCharacter"
+        formControlName="existingCharacter"
+        [options]="pjsOptions"
+        (valueChanges)="setExistingCharacter($event)"/>
+      <button (click)="addExistingCharacter()" class="icon-button sm">
+        <img src="assets/icons/pj/add_pj.svg" alt="Icono de añadir pj">
+      </button>
+    </div>
+  </form>
+</div>

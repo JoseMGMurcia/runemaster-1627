@@ -1,0 +1,13 @@
+.stats-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.element {
+  max-width: 100%;
+}
+
+.stat {
+  height: min-content;
+}

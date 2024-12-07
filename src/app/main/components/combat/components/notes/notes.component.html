@@ -1,0 +1,53 @@
+@if(pj){
+  <div class="stats-wrapper u-flex u-flex-column margin-top u-border-all">
+    <div class="u-width-100 u-flex u-flex-center u-flex-space-between group-header">
+      <div *ngIf="swShowDetail && !swShowNewNote">
+        <div-tooltip
+            tooltipText="{{ 'UTILITY.ACTIONS.NEW_NOTE' | translate }}"
+            [tooltipPosition]="RQGTooltipPositionEnum.RIGHT">
+          <button (click)="addNote()" class="icon-button xs margin-left">
+            <img src="assets/icons/nav/add.png" alt="Icono cerrar" class="white">
+          </button>
+        </div-tooltip>
+      </div>
+
+      <p class="u-text-center u-width-100 padding-all group-header" (click)="switchShowDetail()">{{ "PJ.NOTES" | translate }} </p>
+      <div></div>
+    </div>
+
+    @if(swShowNewNote){
+      <form [formGroup]="form" class="u-width-100 margin-bottom u-flex">
+        <button (click)="newNote()" class="icon-button xs margin-left">
+          <img src="assets/icons/nav/add.png" alt="Icono cerrar">
+        </button>
+
+        <div class="note-area">
+          <app-input
+            class="u-width-100"
+            formControlName="newNote"
+            [control]="form.controls.newNote"
+            label="{{ 'UTILITY.ACTIONS.NEW_NOTE' | translate }}"
+            [area]="true"
+          />
+        </div>
+      </form>
+    }
+
+
+    <div class="u-margin-top"></div>
+    @if(swShowDetail){
+      @for(note of notes;let i = $index; track note){
+        <div class="u-width-100 u-flex u-flex-space-between u-flex-center" [ngClass]="i % 2 === 0 ? 'odd' : 'even'">
+          <p class="margin-left"> {{ note }}</p>
+          <button (click)="removeNote(note)" class="icon-button xs margin-right">
+            <img src="assets/icons/nav/trash.svg" alt="Eliminar">
+          </button>
+        </div>
+      }
+
+      @if(notes.length === 0){
+        <p class="u-width-100 u-text-center padding-all">{{ "UTILITY.NO_NOTES" | translate }}</p>
+      }
+    }
+  </div>
+}

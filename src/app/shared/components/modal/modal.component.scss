@@ -1,0 +1,22 @@
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.modal {
+  background-color: white;
+  border: rgb(227, 227, 227) 1px solid;
+  border-radius: 16px;
+  left: 50%;
+  overflow: auto;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: left;
+  z-index: 2;
+}

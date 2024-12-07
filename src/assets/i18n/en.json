@@ -1,0 +1,11 @@
+{
+  "RUNEQUEST": "RuneQuest",
+  "UTILITY": {
+    "LABELS": {
+      "ROLL_DICES": "Tirar dados"
+    },
+    "PLACEHOLDERS": {
+      "DICES": "Dados"
+    }
+  }
+}

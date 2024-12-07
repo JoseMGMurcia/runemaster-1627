@@ -1,0 +1,69 @@
+@if(pj && pj.name){
+  <div class="u-width-100 u-flex u-flex-column margin-top">
+    <div class="u-width-100 u-flex u-flex-center margin-left margin-right margin-top u-flex-space-center">
+      <p class="strong margin-right margin-left">{{ "PJ.HP" | translate }}:</p>
+      <button (click)="setHP(-1)" class="card-icon-button u-flex u-flex-space-center">
+        <img src="assets/icons/nav/remove_solid.svg" alt="add HP">
+      </button>
+      <p> {{ getHP() + pj.actualHPVariation }} / {{ getHP()  }}</p>
+      <button (click)="setHP(1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+        <img src="assets/icons/nav/add_solid.svg" alt="remove HP">
+      </button>
+      <button (click)="resetHP()" class="icon-button xs margin-left">
+        <img src="assets/icons/nav/reset.svg" alt="Icono cerrar">
+      </button>
+    </div>
+
+    <div class="u-width-100 u-flex u-flex-center margin-left margin-right  u-flex-space-center">
+      <p class="strong margin-right margin-left">{{ "PJ.MP" | translate }}:</p>
+      <button (click)="setMP(-1)" class="card-icon-button u-flex u-flex-space-center">
+        <img src="assets/icons/nav/remove_solid.svg" alt="add MP">
+      </button>
+      <p> {{ getMP() + pj.actualMPVariation }} / {{ getMP() }}</p>
+      <button (click)="setMP(1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+        <img src="assets/icons/nav/add_solid.svg" alt="remove MP">
+      </button>
+      <button (click)="resetMP()" class="icon-button xs margin-left">
+        <img src="assets/icons/nav/reset.svg" alt="Icono cerrar">
+      </button>
+    </div>
+  </div>
+
+
+  <div class="briefing-wrapper margin-top margin-left">
+    <p class="u-text-center u-width-100 padding-all group-header" (click)="switchShowBriefing()">
+      {{ "UTILITY.SECTIONS.BRIEFING" | translate }}
+    </p>
+    @if(swShowBriefing){
+      <div class="u-width-100 u-flex u-flex-center padding-left margin-right margin-top odd">
+        <p class="strong margin-right u-width-50">{{ "PJ.MRDEX" | translate }}:</p>
+        <p> {{ getMRDEX() }}</p>
+      </div>
+      <div class="u-width-100 u-flex u-flex-center padding-left margin-right">
+        <p class="strong margin-right u-width-50">{{ "PJ.MRSIZ" | translate }}:</p>
+        <p> {{ getMSIZ() }}</p>
+      </div>
+      <div class="u-width-100 u-flex u-flex-center padding-left margin-right odd">
+        <p class="strong margin-right u-width-50">{{ "PJ.HEALING_RATE" | translate }}:</p>
+        <p> {{ "PJ.N_WEEK" | translate: { hp: getHealingRate()} }}</p>
+      </div>
+      <div class="u-width-100 u-flex u-flex-center padding-left margin-right">
+        <p class="strong margin-right u-width-50">{{ "PJ.DAMAGE_MODIFIER" | translate }}:</p>
+        <p *ngIf="damageModifier.dice"> {{ damageModifier.dice }}D{{damageModifier.sides}}</p>
+      </div>
+      <div class="u-width-100 u-flex u-flex-center padding-left margin-right odd">
+        <p class="strong margin-right u-width-50">{{ "PJ.SPIRIT_DAMAGE" | translate }}:</p>
+        <p *ngIf="spiritDMGMod.dice"> {{ spiritDMGMod.dice }}D{{spiritDMGMod.sides}}</p>
+        <p *ngIf="spiritDMGMod.modifier">+{{spiritDMGMod.modifier}}</p>
+      </div>
+      <div class="u-width-100 u-flex u-flex-center padding-left margin-right">
+        <p class="strong margin-right u-width-50">{{ "PJ.MOVEMENT" | translate }}:</p>
+        <p> {{ pj.movement }}</p>
+      </div>
+      <div class="u-width-100 u-flex u-flex-center padding-left margin-right margin-bottom odd">
+        <p class="strong margin-right u-width-50">{{ "PJ.CRG" | translate }}:</p>
+        <p> {{ getCRG() }} / {{ getMaxCRG() }}</p>
+      </div>
+    }
+  </div>
+}

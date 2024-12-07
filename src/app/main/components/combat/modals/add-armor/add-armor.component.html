@@ -1,0 +1,26 @@
+<div class="add-armor-wrapper">
+  <p class="modal-title">{{ "UTILITY.ACTIONS.ADD_ARMOR" | translate }}</p>
+  <form [formGroup]="form" class="u-width-100 margin-bottom">
+    <div class="u-width-100 u-flex u-flex-wrap u-flex-space-center">
+      <app-select
+        label="{{ 'PJ.WEAPON' | translate }}"
+        [control]="form.controls.armor"
+        formControlName="armor"
+        [options]="armorOptions"
+        (valueChanges)="armorChange($event)"/>
+    </div>
+  </form>
+
+  <div class="u-flex u-flex-end u-width-100 section">
+    <div class="u-flex">
+      <button class="secondary-button margin-right" (click)="handleCancel()">
+        <img class="icon icon-sm margin-right" src="assets/icons/nav/close.svg" alt="cancel">
+        {{ "COMMON.CANCEL" | translate }}
+      </button>
+      <button class="primary-button" (click)="handleAdd()" [disabled]="!selectedArmor">
+        <img class="icon icon-sm white margin-right" src="assets/icons/pj/add_weapon.svg" alt="add">
+        {{ "COMMON.ADD" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

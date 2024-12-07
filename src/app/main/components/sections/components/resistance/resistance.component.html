@@ -1,0 +1,23 @@
+<div class="resistance-wrap">
+  <form [formGroup]="form" class="u-flex u-flex-space-center">
+    <div>
+      <app-input
+        label="{{ 'UTILITY.LABELS.ACTIVE' | translate }}"
+        [control]="form.controls.active"
+        formControlName="active"
+        type="number"/>
+      <app-input
+        label="{{ 'UTILITY.LABELS.PASIVE' | translate }}"
+        [control]="form.controls.passive"
+        formControlName="passive"
+        type="number"/>
+      <div class="u-flex u-flex-center u-flex-space-around">
+        <p> {{ gettargetNumber() }}%</p>
+        <button (click)="rollResistance()" class="icon-button sm">
+          <img src="assets/icons/dices/roll_dice.svg" alt="Icono de lanzar dados">
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

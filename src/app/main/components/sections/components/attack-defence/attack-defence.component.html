@@ -1,0 +1,22 @@
+<div class="attack-defence-wrap">
+  <form [formGroup]="form" class="u-width-100">
+    <div class="u-width-100 u-flex u-flex-wrap u-flex-space-center">
+      <app-select
+        #attackComponent
+        label="{{ 'ATACK_DEFENDE.ATTACK_RESULT' | translate }}"
+        [control]="form.controls.attack"
+        formArrayName="attack"
+        [options]="options"
+        (valueChanges)="attackChange($event)"/>
+      <app-select
+        #defence
+        label="{{ 'ATACK_DEFENDE.DEFENCE_RESULT' | translate }}"
+        [control]="form.controls.defence"
+        formArrayName="defence"
+        [options]="options"
+        (valueChanges)="defenceChange($event)"/>
+    </div>
+  </form>
+  <p class="result">{{ result }}</p>
+  <p><b>{{ "ATACK_DEFENDE.DODGE" | translate }}:</b> {{ dodgeResult }}</p>
+  </div>

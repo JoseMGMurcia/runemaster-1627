@@ -1,0 +1,46 @@
+@use 'assets/scss/custom-colors.scss' as colors;
+
+%default-toast {
+  // Indicate a placeholder selected with a preceding '%'
+  align-items: center;
+  backdrop-filter: blur(12px);
+  background-color: colors.$white-100-fade;
+  border-left: 6px solid black;
+  border-radius: 4px;
+  box-shadow: 6px 6px 12px #00000040;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  min-width: max-content;
+  padding: 8px 24px;
+  position: absolute;
+  right: 24px;
+  top: 60px;
+}
+
+img {
+  margin-left: 24px;
+}
+
+// Default toast && type classes
+.toast-class {
+  @extend %default-toast;
+}
+
+.success-toast {
+  @extend %default-toast;
+
+  border-left: 6px solid colors.$success;
+}
+
+.warning-toast {
+  @extend %default-toast;
+
+  border-left: 6px solid colors.$warning;
+}
+
+.error-toast {
+  @extend %default-toast;
+
+  border-left: 6px solid colors.$error;
+}

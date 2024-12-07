@@ -1,0 +1,27 @@
+<div class="change-body-wrapper">
+  <p class="modal-title">{{ "UTILITY.ACTIONS.CHANGE_BODY" | translate }}</p>
+  <form [formGroup]="form" class="u-width-100 margin-bottom">
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-select
+        label="{{ 'LOCATIONS.SPECIES' | translate }}"
+        [control]="form.controls.species"
+        formControlName="species"
+        [options]="options"
+        (valueChanges)="raceChange($event)"/>
+    </div>
+  </form>
+
+  <div class="u-flex u-flex-end u-width-100 section">
+    <div class="u-flex">
+      <button class="secondary-button margin-right" (click)="handleCancel()">
+        <img class="icon icon-sm margin-right" src="assets/icons/nav/close.svg" alt="cancel">
+        {{ "COMMON.CANCEL" | translate }}
+      </button>
+      <button class="primary-button" (click)="handleAdd()" [disabled]="!selectedLocations">
+        <img class="icon icon-sm white margin-right" src="assets/icons/pj/add_weapon.svg" alt="add">
+        {{ "COMMON.ADD" | translate }}
+      </button>
+    </div>
+  </div>
+
+</div>

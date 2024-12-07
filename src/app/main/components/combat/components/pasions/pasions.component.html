@@ -1,0 +1,41 @@
+@if(pj){
+  <div class="u-flex u-flex-wrap margin-top u-border-all margin-left" [ngClass]="swShowPasions ? 'u-width-100' : ''  ">
+    <div class="u-width-100 u-flex u-flex-center u-flex-space-between group-header">
+      <div *ngIf="swShowPasions">
+        <div-tooltip
+            tooltipText="{{ 'UTILITY.ACTIONS.NEW_PASSION' | translate }}"
+            [tooltipPosition]="RQGTooltipPositionEnum.RIGHT">
+          <button (click)="addNewPasion()" class="icon-button xs margin-left">
+            <img src="assets/icons/nav/add.png" alt="Icono cerrar" class="white">
+          </button>
+        </div-tooltip>
+      </div>
+
+      <p class="u-text-center u-width-100 padding-all group-header" (click)="switchShowDetails()">{{ "PJ.PASSIONS" | translate }} </p>
+      <div></div>
+    </div>
+
+    @if(swShowPasions){
+      <div class="u-width-100 u-flex">
+        <p class="u-width-66 u-text-center strong">{{ "PJ.PASSION" | translate }}</p>
+        <p class="u-width-33 strong">{{ "COMMON.VALUE" | translate }}</p>
+      </div>
+      @for(passion of pj.passions; track passion; let i = $index){
+        <div class="u-width-100 u-flex u-flex-center padding-left" [ngClass]="gwtRowClass(i)">
+          <p class="u-width-66 u-text-center"> {{ 'PASSIONS.' + passion.type | translate }} {{ passion.description }}</p>
+          <div class="u-width-33 u-flex u-flex-center u-flex-space-between">
+            <p class="u-width-33 u-text-center">
+              {{ passion.value }}
+              <button (click)="rollAttack(passion)" class="icon-button xs">
+                <img src="assets/icons/dices/roll_dice.svg" alt="Icono cerrar">
+              </button>
+            </p>
+            <button (click)="removePassion(passion)" class="icon-button xs margin-right">
+              <img src="assets/icons/nav/trash.svg" alt="Eliminar">
+            </button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+}

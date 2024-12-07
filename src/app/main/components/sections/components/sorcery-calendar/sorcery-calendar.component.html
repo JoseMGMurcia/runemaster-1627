@@ -1,0 +1,42 @@
+<div class="sorcery-calendar-wrap">
+  <form [formGroup]="form">
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-select
+        label="{{ 'CALENDAR.SEASON' | translate }}"
+        [control]="form.controls.season"
+        [options]="seasonOptions"
+        (valueChanges)="seasonChange($event)"/>
+    </div>
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-select
+        label="{{ 'CALENDAR.WEENK' | translate }}"
+        [control]="form.controls.week"
+        [options]="weekOptions"
+        (valueChanges)="weekChange($event)"/>
+    </div>
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-select
+        label="{{ 'CALENDAR.DAY' | translate }}"
+        [control]="form.controls.day"
+        [options]="dayOptions"
+        (valueChanges)="dayChange($event)"/>
+    </div>
+  </form>
+  <div class="padding-all">
+    @if(bonus.water){ <p><b>{{ 'CALENDAR.BONUS.WATER' | translate }}:</b> {{ bonus.water }}</p> }
+    @if(bonus.earth){ <p><b>{{ 'CALENDAR.BONUS.EARTH' | translate }}:</b> {{ bonus.earth }}</p> }
+    @if(bonus.fire){ <p><b>{{ 'CALENDAR.BONUS.FIRE' | translate }}:</b> {{ bonus.fire }}</p> }
+    @if(bonus.darkness){ <p><b>{{ 'CALENDAR.BONUS.DARKNESS' | translate }}:</b> {{ bonus.darkness }}</p> }
+    @if(bonus.wind){ <p><b>{{ 'CALENDAR.BONUS.WIND' | translate }}:</b> {{ bonus.wind }}</p> }
+    @if(bonus.disorder){ <p><b>{{ 'CALENDAR.BONUS.DISORDER' | translate }}:</b> {{ bonus.disorder }}</p> }
+    @if(bonus.harmony){ <p><b>{{ 'CALENDAR.BONUS.HARMONY' | translate }}:</b> {{ bonus.harmony }}</p> }
+    @if(bonus.death){ <p><b>{{ 'CALENDAR.BONUS.DEATH' | translate }}:</b> {{ bonus.death }}</p> }
+    @if(bonus.fertility){ <p><b>{{ 'CALENDAR.BONUS.FERTILITY' | translate }}:</b> {{ bonus.fertility }}</p> }
+    @if(bonus.stasis){ <p><b>{{ 'CALENDAR.BONUS.STASIS' | translate }}:</b> {{ bonus.stasis }}</p> }
+    @if(bonus.movement){ <p><b>{{ 'CALENDAR.BONUS.MOVEMENT' | translate }}:</b> {{ bonus.movement }}</p> }
+    @if(bonus.illusion){ <p><b>{{ 'CALENDAR.BONUS.ILLUSION' | translate }}:</b> {{ bonus.illusion }}</p> }
+    @if(bonus.truth){ <p><b>{{ 'CALENDAR.BONUS.TRUTH' | translate }}:</b> {{ bonus.truth }}</p> }
+    @if(bonus.notElemental){ <p><b>{{ 'CALENDAR.BONUS.NOT_ELEMENTAL' | translate }}:</b> {{ bonus.notElemental }}</p> }
+    <p class="margin-top"><b>{{ 'CALENDAR.LUNE' | translate }}:</b> {{ 'CALENDAR.LUNES.' + lune | translate }}</p>
+  </div>
+</div>

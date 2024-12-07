@@ -1,0 +1,31 @@
+<div class="spell-wrap">
+  <p *ngIf="spell.points > 1" class="italic">{{ spell.points}} {{ "SPELLS.POINTS" | translate }}</p>
+  <p *ngIf="spell.points === 1" class="italic">{{ spell.points}} {{ "SPELLS.POINT" | translate }}</p>
+
+  <p *ngIf="!spell.points" class="italic">{{ "SPELLS.VARIABLE" | translate }}</p>
+  <div class="u-flex">
+    <p *ngIf="spell.range === SpellRange.DISTANCE" class="italic">{{ "SPELLS.RANGUED" | translate }}</p>
+    <p *ngIf="spell.range === SpellRange.TOUCH" class="italic">{{ "SPELLS.TOUCH" | translate }}</p>
+    <p *ngIf="spell.range === SpellRange.SELF" class="italic">{{ "SPELLS.SELF" | translate }}</p>
+
+    <p *ngIf="spell.duration === SpellDuration.INSTANT" class="italic">, {{ "SPELLS.INSTANT" | translate }}</p>
+    <p *ngIf="spell.duration === SpellDuration.TEMPORAL" class="italic">, {{ "SPELLS.TEMPORAL" | translate }}</p>
+    <p *ngIf="spell.duration === SpellDuration.PERMANENT" class="italic">, {{ "SPELLS.PERMANENT" | translate }}</p>
+    <p *ngIf="spell.duration === SpellDuration.SPECIAL" class="italic">, {{ "SPELLS.SPECIAL" | translate }}</p>
+
+    <p *ngIf="spell.mode === SpellMode.ACTIVE && spell.duration !== SpellDuration.INSTANT && spell.duration !== SpellDuration.PERMANENT"
+      class="italic"
+    >, {{ "SPELLS.ACTIVE" | translate }}</p>
+    <p *ngIf="spell.mode === SpellMode.PASSIVE && spell.duration !== SpellDuration.INSTANT && spell.duration !== SpellDuration.PERMANENT"
+      class="italic"
+    >, {{ "SPELLS.PASSIVE" | translate }}</p>
+    <p *ngIf="spell.mode === SpellMode.FOCUS && spell.duration !== SpellDuration.INSTANT && spell.duration !== SpellDuration.PERMANENT"
+      class="italic"
+    >, {{ "SPELLS.FOCUS" | translate }}</p>
+    <p *ngIf="spell.mode === SpellMode.VARIES && spell.duration !== SpellDuration.INSTANT && spell.duration !== SpellDuration.PERMANENT"
+      class="italic"
+    >, {{ "SPELLS.VARIES" | translate }}</p>
+
+  </div>
+  <p class="margin-top justify description">{{ 'SPELLS.DESCRIPTIONS.' + selectedSpell | translate }}</p>
+</div>

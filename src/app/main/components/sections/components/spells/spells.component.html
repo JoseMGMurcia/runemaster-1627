@@ -1,0 +1,21 @@
+<div class="spells-wrap">
+  <form [formGroup]="form" class="u-width-100">
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-select
+        label="{{ 'SPELLS.SPELL_TYPE' | translate }}"
+        [control]="form.controls.spellType"
+        formControlName="spellType"
+        [options]="spellTypesOption"
+        (valueChanges)="typeChange($event)"/>
+    </div>
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-select
+        label="{{ 'SPELLS.SPELL' | translate }}"
+        [control]="form.controls.spellName"
+        formControlName="spellName"
+        [options]="spellNamesOption"
+        (valueChanges)="nameChange($event)"/>
+    </div>
+  </form>
+  <app-spell [selectedType]="selectedType" [selectedSpell]="selectedSpell"/>
+</div>

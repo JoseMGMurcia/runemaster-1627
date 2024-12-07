@@ -1,1 +1,286 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'assets/scss/custom-colors.scss' as colors;
+@import 'assets/scss/basic.scss';
+@import 'assets/scss/aminations/modal.animations.scss';
+
+app-root { z-index: 1; }
+
+app-toast,
+.toast-class { z-index: 2; }
+
+html,
+body {
+  background-color: colors.$background;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100%;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  color: colors.$text-primary;
+
+  &.center {
+    text-align: center;
+  }
+
+  &.strong {
+    font-weight: 700;
+  }
+
+  &.small {
+    font-size: 12px;
+  }
+
+  &.primary {
+    color: colors.$primary;
+  }
+
+  &.italic {
+    font-style: italic;
+  }
+
+  &.justify {
+    text-align: justify;
+  }
+}
+
+.primary-button {
+  background-color: colors.$primary;
+  border: none;
+  border-radius: 4px;
+  color: colors.$white-200;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: max-content;
+  outline: none;
+  padding: 8px 12px;
+
+  &:hover {
+    background-color: darken(colors.$primary, 10%);
+  }
+
+  &:disabled {
+    background-color: mix(colors.$primary, colors.$blue-gray-300, 60%);
+    cursor: not-allowed;
+  }
+}
+
+.secondary-button {
+  background-color: colors.$white;
+  border: 1px solid colors.$primary;
+  border-radius: 4px;
+  color: colors.$primary;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: max-content;
+  outline: none;
+  padding: 8px 12px;
+
+  &:hover {
+    background-color: darken(colors.$menu-background-contrast-50, 1%);
+    color: darken(colors.$secondary, 18%);
+  }
+
+  &:disabled {
+    border-color: colors.$menu-background-50;
+    color: colors.$menu-background-50;
+    cursor: not-allowed;
+  }
+}
+
+.link-button {
+  background-color: transparent;
+  border: none;
+  color: colors.$primary;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  padding: 0;
+
+
+  &:hover {
+    font-size: 16px;
+    text-transform: bold;
+  }
+
+  &:disabled {
+    color: lighten(colors.$primary, 20%);
+    cursor: not-allowed;
+  }
+
+  &.dark {
+    color: darken(colors.$primary, 20%);
+    scale: 1.2;
+  }
+}
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+
+  &:hover {
+    img {
+      margin: 5px;
+      height: 42px;
+      width: 42px;
+      filter: hue-rotate(180deg);
+    }
+
+    &.sm {
+      img {
+        margin: 2px;
+        height: 28px;
+        width: 28px;
+      }
+    }
+
+    &.xs {
+      img {
+        margin: 1px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+
+    &.xxs {
+      img {
+        margin: 0;
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  img {
+    margin: 8px;
+    height: 36px;
+    width: 36px;
+  }
+
+  &.sm {
+    img {
+      margin: 4px;
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  &.xs {
+    img {
+      margin: 3px;
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  &.xxs {
+    img {
+      margin: 2px;
+      height: 12px;
+      width: 12px;
+    }
+  }
+}
+
+.card-icon-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+
+
+  img {
+    margin: 2px;
+    height: 12px;
+    width: 12px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .wide {
+    width: 22px;
+  }
+
+  p {
+    // strong bold  text style
+
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    height: 14px;
+    width: 14px;
+    border-radius: 7px;
+    padding: 0 4px 0 2px;
+    background-color: colors.$icon-button-back;
+    min-width: max-content;
+  }
+
+  &:hover {
+    img {
+      margin: 0;
+      height: 16px;
+      width: 16px;
+      border-radius: 8px;
+    }
+
+    .wide {
+      width: 26px;
+    }
+  }
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+
+  &-md {
+    height: 16px;
+    width: 16px;
+  }
+
+  &-sm {
+    height: 12px;
+    width: 12px;
+  }
+
+
+}
+
+.group {
+  background-color: colors.$blue-gray-50;
+  border-radius: 8px;
+  border: 1px solid colors.$white-50;
+}
+
+.group-header {
+  color: colors.$blue-gray-50;
+  background-color: colors.$primary;
+  cursor: pointer;
+  user-select: none;
+}
+
+.modal-title {
+  color: darken(colors.$menu-background, 10%);
+  font-size: 1.6rem;
+  margin-bottom: 30px;
+  padding: 0 3rem;
+  text-align: center;
+}
+
+.white {
+  filter: invert(1) sepia(1) saturate(1) hue-rotate(180deg);
+}

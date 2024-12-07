@@ -1,0 +1,12 @@
+@use 'assets/scss/custom-colors.scss' as colors;
+
+.briefing-wrapper {
+  border-radius: 8px;
+  border: 1px solid colors.$blue-gray-50;
+  overflow: hidden;
+}
+
+.odd {
+  background-color: colors.$card-background-pair;
+  width: 100%;
+}

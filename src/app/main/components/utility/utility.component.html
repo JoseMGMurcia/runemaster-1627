@@ -1,0 +1,62 @@
+<div class="utility-wrap">
+  <form [formGroup]="form">
+    <div class="u-flex u-flex-wrap">
+
+      <div class="u-flex u-flex-column">
+        <div class="group u-flex u-flex-center margin-bottom-sm u-flex-space-center">
+          <app-input
+            label="{{ 'UTILITY.LABELS.ROLL_DICES' | translate }}"
+            placeholder="{{ 'UTILITY.PLACEHOLDERS.DICES' | translate }}"
+            formControlName="diceRoll"
+            [control]="form.controls.diceRoll"/>
+
+          <button (click)="rollDices()" class="icon-button">
+            <img src="assets/icons/dices/roll_dice.svg" alt="Icono de lanzar dados">
+          </button>
+        </div>
+
+        <div class="group margin-bottom-sm u-flex u-flex-space-center">
+          <button (click)="rollD4()" class="icon-button">
+            <img src="assets/icons/dices/d4.png" alt="Icono de lanzar dados D4">
+          </button>
+          <button (click)="rollD6()" class="icon-button">
+            <img src="assets/icons/dices/d6.png" alt="Icono de lanzar dados D6">
+          </button>
+          <button (click)="rollD8()" class="icon-button">
+            <img src="assets/icons/dices/d8.png" alt="Icono de lanzar dados D8">
+          </button>
+          <button (click)="rollD10()" class="icon-button">
+            <img src="assets/icons/dices/d10-2.png" alt="Icono de lanzar dados D10">
+          </button>
+          <button (click)="rollD20()" class="icon-button">
+            <img src="assets/icons/dices/d20_tapped.png" alt="Icono de lanzar dados D20">
+          </button>
+          <button (click)="rollD100()" class="icon-button">
+            <img src="assets/icons/dices/d100.svg" alt="Icono de lanzar dados">
+          </button>
+        </div>
+      </div>
+
+      <div class="group margin-left result margin-bottom-sm">
+        <p class="center strong small primary">{{ 'UTILITY.LABELS.RESULTS' | translate }}</p>
+        <p class="center" *ngFor="let result of results; let i = index" [ngClass]="i === results.length - 1 ? 'last-result' : ''">
+          {{ result }}
+        </p>
+      </div>
+    </div>
+
+    <div class="u-width-100 u-flex minimum-width">
+      <app-sections class="u-width-50 padding-right minimum-width" (results)="addResults($event)" [section]="SectionEnum.AtackDefence"/>
+      <app-sections class="u-width-50 minimum-width" (results)="addResults($event)" [section]="SectionEnum.LocationDamages"/>
+    </div>
+    <div class="u-width-100 u-flex minimum-width">
+      <app-sections class="u-width-50 padding-right minimum-width" (results)="addResults($event)" [section]="SectionEnum.Locations"/>
+      <app-sections class="u-width-50 minimum-width" (results)="addResults($event)" [section]="SectionEnum.Fumbles"/>
+    </div>
+    <div class="u-width-100 u-flex minimum-width">
+      <app-sections class="u-width-50 padding-right minimum-width" (results)="addResults($event)" [section]="SectionEnum.Resistances"/>
+      <app-sections class="u-width-50 minimum-width" (results)="addResults($event)" [section]="SectionEnum.SorceryCalendar"/>
+    </div>
+  </form>
+
+</div>

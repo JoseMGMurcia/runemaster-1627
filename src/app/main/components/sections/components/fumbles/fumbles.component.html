@@ -1,0 +1,15 @@
+<div class="fumbles-wrap">
+  <form [formGroup]="form" class="u-flex u-flex-space-center">
+    <div class="u-flex">
+      <app-input
+        label="{{ 'UTILITY.LABELS.RESULT' | translate }}"
+        [control]="form.controls.fumble"
+        formControlName="fumble"
+        type="number"/>
+      <button (click)="rollFumble()" class="icon-button sm">
+        <img src="assets/icons/dices/roll_dice.svg" alt="Icono de lanzar dados">
+      </button>
+    </div>
+  </form>
+  <p>{{ getFumble() }}</p>
+</div>

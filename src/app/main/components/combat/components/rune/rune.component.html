@@ -1,0 +1,28 @@
+<div class="rune u-flex u-flex-space-center u-flex-center u-border-all-free" *ngIf="!elementalRune">
+  <button (click)="setRune(rune, -1)" class="card-icon-button u-flex u-flex-space-center">
+    <img src="assets/icons/nav/remove_solid.svg" alt="add natural armor">
+  </button>
+  <div-tooltip
+    tooltipText="{{ 'RUNES.' + rune.rune  | translate }}">
+    <img [src]="'assets/icons/runes/' + rune.rune + '.png'" alt="rune" class="rune-img" (click)="rollRune(rune)">
+  </div-tooltip>
+   <p class="margin-left">{{ rune.value }}</p>
+  <button (click)="setRune(rune, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+    <img src="assets/icons/nav/add_solid.svg" alt="remove natural armor">
+  </button>
+</div>
+<div class="rune u-flex u-flex-column u-flex-center u-border-all-free" *ngIf="elementalRune">
+  <div-tooltip
+  tooltipText="{{ 'RUNES.' + rune.rune  | translate }}">
+  <img [src]="'assets/icons/runes/' + rune.rune + '.png'" alt="rune" class="rune-img" (click)="rollRune(rune)">
+  </div-tooltip>
+  <div class="u-flex u-flex-center u-flex-space-center">
+    <button (click)="setRune(rune, -1)" class="card-icon-button u-flex u-flex-space-center">
+      <img src="assets/icons/nav/remove_solid.svg" alt="add natural armor">
+    </button>
+     <p>{{ rune.value }}</p>
+    <button (click)="setRune(rune, 1)" class="card-icon-button shadow u-flex u-flex-space-center">
+      <img src="assets/icons/nav/add_solid.svg" alt="remove natural armor">
+    </button>
+  </div>
+</div>

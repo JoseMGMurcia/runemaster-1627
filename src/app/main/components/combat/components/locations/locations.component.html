@@ -1,0 +1,145 @@
+@if(pj){
+  <div class="stats-wrapper u-flex u-flex-wrap margin-top">
+    <p class="u-text-center u-width-100 padding-all group-header" (click)="switchShowLocations()">{{ "PJ.LOCATION_PLURAL" | translate }} </p>
+    @if(swShowLocations){
+      <p class="u-width-33 strong u-text-center">{{ "PJ.NAME" | translate }}</p>
+      <div class="u-width-66 u-flex">
+        <p class="u-width-25 u-text-center strong">{{ "PJ.HP" | translate }}</p>
+        <p class="u-width-50 u-text-center strong">{{ "PJ.AP" | translate }}</p>
+        <p class="u-width-25 u-text-center strong">{{ "LOCATIONS.RANGE" | translate }}</p>
+      </div>
+      <div *ngFor="let location of locations; let i = index" class="u-flex u-flex-column" [ngClass]="gwtRowClass(i)">
+        <div class="u-width-100 u-flex" >
+          <p class="u-width-33 padding-right u-flex u-flex-center">
+            <div-tooltip
+                tooltipText="{{ (!location.swShowDetail ? 'COMMON.SEE_DETAIL' : 'COMMON.HIDE_DETAIL') | translate }}"
+                [tooltipPosition]="RQGTooltipPositionEnum.RIGHT">
+              <button (click)="detail(location)" class="icon-button xs">
+                <img src="assets/icons/nav/eye.svg" alt="Icono cerrar">
+              </button>
+            </div-tooltip>
+            {{ "PJ.LOCATIONS." + location.type | translate }}
+          </p>
+          <div class="u-width-66 u-flex">
+            <div class="u-width-25 u-flex u-flex-space-center">
+              <button (click)="setHp(location, -1)" class="card-icon-button u-flex u-flex-space-center">
+                <img src="assets/icons/nav/remove_solid.svg" alt="add HP">
+              </button>
+              <p [ngClass]="getHPClass(location)">{{ getLocationHp(location) + location.actualHPVariation }}</p><p> / {{ getLocationHp(location)}}</p>
+              <button (click)="setHp(location, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                <img src="assets/icons/nav/add_solid.svg" alt="remove HP">
+              </button>
+            </div>
+            <p class="u-width-50 u-text-center">{{ getArmor(location) }}</p>
+            <p class="u-width-25 u-text-center" *ngIf="location.rangue.min < location.rangue.max else sameRangue">
+              {{ location.rangue.min }} - {{ location.rangue.max }}
+            </p>
+            <ng-template #sameRangue>
+              <p class="u-width-25 u-text-center">{{ location.rangue.min }}</p>
+            </ng-template>
+          </div>
+        </div>
+
+        @if(location.swShowDetail){
+          <div class="u-width-100 u-flex padding-all u-flex-column" >
+            <div class="u-width-100 u-flex" >
+              <div class="u-width-50 u-flex u-flex-column" >
+                <div class="u-width-100 u-flex" >
+
+                  <p class="strong margin-left u-width-50">{{ "PJ.NATURAL_ARMOR" | translate }}:</p>
+                  <div class="u-width-50 u-flex u-flex-space-center">
+                    <button (click)="setNaturalArmor(location, -1)" class="card-icon-button u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/remove_solid.svg" alt="add natural armor">
+                    </button>
+                    <p>{{ location.naturalArmor }}</p>
+                    <button (click)="setNaturalArmor(location, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/add_solid.svg" alt="remove natural armor">
+                    </button>
+                  </div>
+                </div>
+
+                <div class="u-width-100 u-flex u-margin-top" >
+                  <p class="strong margin-left u-width-20">{{ "PJ.BONUSES" | translate }}</p>
+                  <p class="u-width-40 center strong">{{ "PJ.BONUS.TEMPORAL_SHORT" | translate }}</p>
+                  <p class="u-width-40 center strong">{{ "PJ.BONUS.PERMANENT_SHORT" | translate }}</p>
+                </div>
+
+                <div class="u-width-100 u-flex" >
+                  <p class="strong margin-left u-width-20">{{ "PJ.AP" | translate }}:</p>
+                  <div class="u-width-40 u-flex u-flex-space-center">
+                    <button (click)="setTemporaryPA(location, -1)" class="card-icon-button u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/remove_solid.svg" alt="add temporal armor bonus">
+                    </button>
+                    <p>{{ location.temporalBonus.AP }}</p>
+                    <button (click)="setTemporaryPA(location, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/add_solid.svg" alt="remove temporal armor bonus">
+                    </button>
+                  </div>
+                  <div class="u-width-40 u-flex u-flex-space-center">
+                    <button (click)="setPermanentPA(location, -1)" class="card-icon-button u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/remove_solid.svg" alt="add permanent HP bonus">
+                    </button>
+                    <p>{{ location.permanentBonus.AP }}</p>
+                    <button (click)="setPermanentPA(location, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/add_solid.svg" alt="remove permanent HP bonus">
+                    </button>
+                  </div>
+                </div>
+
+                <div class="u-width-100 u-flex" >
+                  <p class="strong margin-left u-width-20">{{ "PJ.HP" | translate }}:</p>
+                  <div class="u-width-40 u-flex u-flex-space-center">
+                    <button (click)="setTemporaryHP(location, -1)" class="card-icon-button u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/remove_solid.svg" alt="add temporal armor bonus">
+                    </button>
+                    <p>{{ location.temporalBonus.HP }}</p>
+                    <button (click)="setTemporaryHP(location, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/add_solid.svg" alt="remove temporal armor bonus">
+                    </button>
+                  </div>
+                  <div class="u-width-40 u-flex u-flex-space-center">
+                    <button (click)="setPermanentHP(location, -1)" class="card-icon-button u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/remove_solid.svg" alt="add permanent HP bonus">
+                    </button>
+                    <p>{{ location.permanentBonus.HP }}</p>
+                    <button (click)="setPermanentHP(location, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                      <img src="assets/icons/nav/add_solid.svg" alt="remove permanent HP bonus">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="u-width-50 u-flex u-flex-column" >
+                <p class="strong u-width-100 center">{{ "PJ.ARMORS" | translate }}</p>
+                <div *ngFor="let armor of getArmors(location)" class="u-flex u-flex-column">
+                  <app-armor [armor]="armor" [pj]="pj"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="u-width-100 u-flex margin-top">
+              <div-tooltip tooltipText='{{ "UTILITY.ACTIONS.RESET_TEMPORAL_BONUS" | translate }}'>
+                <button class="secondary-button margin-left margin-bottom" (click)="softReset(location)">
+                  <img class="icon icon-sm margin-right" src="assets/icons/nav/reset.svg" alt="reset temporal bonus">
+                  {{ "UTILITY.ACTIONS.RESET_TEMPORAL_BONUS_SHORT" | translate }}
+                </button>
+              </div-tooltip>
+              <div-tooltip tooltipText='{{ "UTILITY.ACTIONS.HARD_RESET" | translate }}'>
+                <button class="secondary-button margin-left margin-bottom" (click)="hardReset(location)">
+                  <img class="icon icon-sm margin-right" src="assets/icons/nav/hard-reset.svg" alt="reset all bonus">
+                  {{ "UTILITY.ACTIONS.HARD_RESET_SHORT" | translate }}
+                </button>
+              </div-tooltip>
+              <div-tooltip tooltipText='{{ "UTILITY.ACTIONS.COPY_VALUES" | translate }}'>
+                <button class="secondary-button margin-left margin-bottom" (click)="copyValuesToAll(location)">
+                  <img class="icon icon-sm margin-right" src="assets/icons/nav/copy.svg" alt="copy bonuses to all locations">
+                  {{ "UTILITY.ACTIONS.COPY_VALUES_SHORT" | translate }}
+                </button>
+              </div-tooltip>
+            </div>
+          </div>
+
+        }
+      </div>
+    }
+  </div>
+}

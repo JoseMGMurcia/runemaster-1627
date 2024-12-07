@@ -1,0 +1,12 @@
+@use 'assets/scss/custom-colors.scss' as colors;
+
+.locations-wrap {
+  background: colors.$blue-gray-50;
+  border-radius: 8px;
+  margin: 4px;
+  padding: 8px;
+
+}
+.pair {
+  background: colors.$background-light;
+}

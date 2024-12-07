@@ -1,0 +1,221 @@
+@if(pj?.name){
+  <div class="weapon-wrapper u-flex u-flex-wrap margin-top u-width-100">
+    <p class="u-text-center u-width-100 padding-all group-header" (click)="switchShowWeapons()">{{ "PJ.WEAPONS" | translate }} </p>
+    @if(swShowWeapons){
+      <div class="u-flex u-flex-wrap margin-top u-width-100">
+        <div class="u-width-100 u-flex">
+          <p class="u-width-10 strong"></p>
+          <p class="u-width-40 strong">{{ "PJ.WEAPON_TABLE.WEAPON" | translate }}</p>
+          <p class="u-width-33 strong u-text-center">{{ "PJ.WEAPON_TABLE.PERCENT" | translate }}</p>
+          <p class="u-width-33 strong u-text-center">{{ "PJ.WEAPON_TABLE.DAMAGE" | translate }}</p>
+          <p class="u-width-25 strong u-text-center">{{ "PJ.WEAPON_TABLE.HP" | translate }}</p>
+          <p class="u-width-33 strong u-text-center">{{ "PJ.WEAPON_TABLE.TOTAL_MR" | translate }}</p>
+          <p class="u-width-10 strong u-text-center"></p>
+        </div>
+        @for(weapon of pj?.weapons; track weapon; let i = $index){
+          <div class="u-width-100 u-flex u-flex-center padding-left" [ngClass]="gwtRowClass(i)">
+            <p class="u-width-50 u-flex u-flex-center">
+              <button (click)="detail(weapon)" class="icon-button xs">
+                <img src="assets/icons/nav/eye.svg" alt="Icono cerrar">
+              </button>
+              {{ "WEAPONS." + weapon.name | translate }}
+            </p>
+            <p class="u-width-33 u-text-center u-flex u-flex-center u-flex-space-center">
+              {{ getTotalWeaponSkill(weapon) }}
+              <button (click)="rollAttack(weapon)" class="icon-button xs">
+                <img src="assets/icons/dices/roll_dice.svg" alt="Icono cerrar">
+              </button>
+            </p>
+            <p class="u-width-33 u-text-center u-flex u-flex-center u-flex-space-center">
+              {{ getDamage(weapon) }}{{ getDamage(weapon) ? damageModifier(weapon) : '' }}
+              <button (click)="rollDamage(weapon)" class="icon-button xs" *ngIf="getDamage(weapon)">
+                <img src="assets/icons/dices/roll_dice.svg" alt="Icono cerrar">
+              </button>
+            </p>
+            @if(getWeaponInitialAP(weapon)){
+              <p class="u-width-25 u-text-center u-flex u-flex-space-center u-flex-center maximum-width">
+                <button (click)="setAP(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                  <img src="assets/icons/nav/remove_solid.svg" alt="add AP">
+                </button>
+                {{ getWeaponInitialAP(weapon) + weapon.apVariation }} / {{ getWeaponInitialAP(weapon) }}
+                <button (click)="setAP(weapon, 1)" class="card-icon-button u-flex u-flex-space-center">
+                  <img src="assets/icons/nav/add_solid.svg" alt="remove AP">
+                </button>
+              </p>
+            }@else{
+              <p class="u-width-25 u-text-center u-flex u-flex-space-center u-flex-center">-</p>
+              }
+            <p class="u-width-33 u-text-center">{{ getTotalMR(weapon) }}</p>
+            @if(weapon.rune){
+              <div class="u-width-10 u-flex u-flex-center u-flex-space-center">
+                <button (click)="handleRuneClick(weapon)" class="icon-button xs">
+                  <img [src]="'assets/icons/runes/'+ weapon.rune + '.png'" alt="">
+                </button>
+              </div>
+            }
+            @else {
+              <p class="u-width-10 u-text-center"></p>
+            }
+          </div>
+          @if(weapon.swShowDetail) {
+            <div [ngClass]="gwtRowClass(i)" class="u-flex u-flex-column">
+
+              <div class="u-width-100 u-flex" >
+                <p class="strong margin-left u-width-25">{{ "PJ.WEAPON_FIELDS.BASE_SKILL" | translate }}:</p>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setSkill(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ getBaseSkill(weapon) }}</p>
+                  <button (click)="setSkill(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+              </div>
+
+              <div class="u-width-100 u-flex u-margin-top" >
+                <p class="u-width-25"></p>
+                <p class="u-width-25 center strong">{{ "PJ.BONUS.TEMPORAL" | translate }}</p>
+                <p class="u-width-25 center strong">{{ "PJ.BONUS.PERMANENT" | translate }}</p>
+              </div>
+              <div class="u-width-100 u-flex" >
+                <p class="strong margin-left u-width-25">{{ "PJ.WEAPON_FIELDS.BONUS_HP" | translate }}:</p>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setTempBonusAP(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ weapon.temporalBonus.AP }}</p>
+                  <button (click)="setTempBonusAP(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setPermBonusAP(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ weapon.permanentBonus.AP }}</p>
+                  <button (click)="setPermBonusAP(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+              </div>
+
+              <div class="u-width-100 u-flex" >
+                <p class="strong margin-left u-width-25">{{ "PJ.WEAPON_FIELDS.BONUS_BASIC_DAMAGE" | translate }}:</p>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setTempBasicDamage(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ weapon.temporalBonus.basicDamagePoints }}</p>
+                  <button (click)="setTempBasicDamage(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setPermBasicDamage(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ weapon.permanentBonus.basicDamagePoints }}</p>
+                  <button (click)="setPermBasicDamage(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+              </div>
+
+              <div class="u-width-100 u-flex" >
+                <p class="strong margin-left u-width-25">{{ "PJ.WEAPON_FIELDS.BONUS_DAMAGE" | translate }}:</p>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setTempDamage(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ weapon.temporalBonus.damagePoints }}</p>
+                  <button (click)="setTempDamage(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setPermDamage(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ weapon.permanentBonus.damagePoints }}</p>
+                  <button (click)="setPermDamage(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+              </div>
+
+              <div class="u-width-100 u-flex" >
+                <p class="strong margin-left u-width-25">{{ "PJ.WEAPON_FIELDS.WEAPON_SKILL_MOD" | translate }}:</p>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setWeaponSkill(weapon.temporalBonus, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ weapon.temporalBonus.skillValue }}</p>
+                  <button (click)="setWeaponSkill(weapon.temporalBonus, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setWeaponSkill(weapon.permanentBonus, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add armor">
+                  </button>
+                  <p>{{ weapon.permanentBonus.skillValue }}</p>
+                  <button (click)="setWeaponSkill(weapon.permanentBonus, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove armor">
+                  </button>
+                </div>
+              </div>
+
+              <div class="u-width-100 u-flex" >
+                <p class="strong margin-left u-width-25">{{ "PJ.CRG" | translate }}:</p>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setTempWeight(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add temporal armor bonus">
+                  </button>
+                  <p>{{ weapon.temporalBonus.weight }}</p>
+                  <button (click)="setTempWeight(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove temporal armor bonus">
+                  </button>
+                </div>
+                <div class="u-width-25 u-flex u-flex-space-center">
+                  <button (click)="setPermWeight(weapon, -1)" class="card-icon-button u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/remove_solid.svg" alt="add permanent HP bonus">
+                  </button>
+                  <p>{{ weapon.permanentBonus.weight }}</p>
+                  <button (click)="setPermWeight(weapon, 1)" class="card-icon-button shadow margin-left-sm u-flex u-flex-space-center">
+                    <img src="assets/icons/nav/add_solid.svg" alt="remove permanent HP bonus">
+                  </button>
+                </div>
+              </div>
+
+              <div class="u-width-100 u-flex margin-top">
+                <button class="secondary-button margin-left margin-bottom" (click)="rollDamage(weapon, SuccessLevelEnum.SUCCESS)">
+                  <img class="icon icon-sm margin-right" src="assets/icons/dices/roll_dice.svg" alt="add">
+                  {{ "UTILITY.ACTIONS.NORMAL_DAMAGE" | translate }}
+                </button>
+                <button class="secondary-button margin-left margin-bottom" (click)="rollDamage(weapon, SuccessLevelEnum.SPECIAL)">
+                  <img class="icon icon-sm margin-right" src="assets/icons/dices/roll_dice.svg" alt="add">
+                  {{ "UTILITY.ACTIONS.SPECIAL_DAMAGE" | translate }}
+                </button>
+                <button class="secondary-button margin-left margin-bottom" (click)="rollDamage(weapon, SuccessLevelEnum.CRITICAL)">
+                  <img class="icon icon-sm margin-right" src="assets/icons/dices/roll_dice.svg" alt="add">
+                  {{ "UTILITY.ACTIONS.CRITICAL_DAMAGE" | translate }}
+                </button>
+                <button class="secondary-button margin-left margin-bottom" (click)="resetTempBonus(weapon)">
+                  <img class="icon icon-sm margin-right" src="assets/icons/nav/reset.svg" alt="add">
+                  {{ "UTILITY.ACTIONS.RESET_TEMPORAL_BONUS_SHORT" | translate }}
+                </button>
+                <button class="primary-button margin-left margin-bottom" (click)="deleteWeapon(weapon)">
+                  <img class="icon icon-sm margin-right white" src="assets/icons/nav/trash.svg" alt="add">
+                  {{ "UTILITY.ACTIONS.REMOVE_WEAPON" | translate }}
+                </button>
+              </div>
+
+            </div>
+          }
+        }
+      </div>
+
+    }
+  </div>
+}

@@ -1,0 +1,21 @@
+<div class="location-damages-wrap">
+  <form [formGroup]="form">
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-select
+        label="{{ 'PJ.LOCATION' | translate }}"
+        [control]="form.controls.locations"
+        formControlName="locations"
+        [options]="locationOptions"
+        (valueChanges)="locChange($event)"/>
+    </div>
+    <div class="u-width-100 u-flex u-flex-space-center">
+      <app-select
+        label="{{ 'COMMON.DAMAGE' | translate }}"
+        [control]="form.controls.damage"
+        formControlName="damage"
+        [options]="damageOptions"
+        (valueChanges)="dmgChange($event)"/>
+    </div>
+  </form>
+  <p>{{getResult()}}</p>
+</div>

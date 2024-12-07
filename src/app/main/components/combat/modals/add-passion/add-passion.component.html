@@ -1,0 +1,40 @@
+<div class="add-passion-wrapper">
+  <p class="modal-title">{{ "UTILITY.ACTIONS.NEW_PASSION" | translate }}</p>
+  <form [formGroup]="form" class="u-width-100 margin-bottom">
+    <div class="u-width-100 u-flex u-flex-wrap u-flex-space-center">
+      <app-select
+        label="{{ 'PJ.PASSION_TYPE' | translate }}"
+        [control]="form.controls.type"
+        formControlName="type"
+        [options]="passionTypeOptions"
+        (valueChanges)="weaponChange($event)"/>
+    </div>
+    <div class="u-width-100 u-flex u-flex-wrap u-flex-space-around margin-top">
+      <app-input
+        label="{{ 'COMMON.DESCRIPTION' | translate }}"
+        [control]="form.controls.description"
+        formControlName="description"/>
+    </div>
+
+    <div class="u-width-100 u-flex u-flex-wrap u-flex-space-center">
+      <app-input
+        label="{{ 'COMMON.VALUE' | translate }}"
+        [control]="form.controls.value"
+        formControlName="value"
+        type="number"/>
+    </div>
+  </form>
+
+  <div class="u-flex u-flex-end u-width-100 section">
+    <div class="u-flex">
+      <button class="secondary-button margin-right" (click)="handleCancel()">
+        <img class="icon icon-sm margin-right" src="assets/icons/nav/close.svg" alt="cancel">
+        {{ "COMMON.CANCEL" | translate }}
+      </button>
+      <button class="primary-button" (click)="handleAdd()" [disabled]="!selectedPassion">
+        <img class="icon icon-sm white margin-right" src="assets/icons/pj/add_weapon.svg" alt="add">
+        {{ "COMMON.ADD" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
